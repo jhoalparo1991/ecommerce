@@ -14,7 +14,9 @@ mysqlConnection();
 const port = process.env.PORT || 3000;
 
 // Middlewares
-app.use(morgan('combined'))
+app.use(morgan('dev'))
+app.use(express.json());
+// app.use(express.urlencoded({extended: false}))
 
 // Static files
 app.use( express.static(path.join(__dirname, 'src','public','uploads')))
@@ -25,6 +27,7 @@ app.use('/docs',swaggerUI.serve,swaggerUI.setup(openapiSpecification));
 app.use('/api/v1',require('./src/routes'));
 
 // Starting server
-app.listen(port,()=>{
-    debug(`Server on port ${port}`);
-});
+
+    app.listen(port,()=>{
+        debug(`Server on port ${port}`);
+    });

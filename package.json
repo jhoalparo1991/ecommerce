@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set DEBUG=app & nodemon ./index.js"
+    "dev": "set DEBUG=app & nodemon ./index.js",
+    "test": "cross-env NODE_ENV=development jest"
   },
   "keywords": [],
   "author": "",
@@ -13,14 +14,25 @@
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-validator": "^6.14.0",
     "multer": "^1.4.4",
     "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
+    "supertest": "^6.2.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "node_modules"
+    ],
+    "displayName": "Test API ecommerce",
+    "testEnvironment": "node"
   }
 }

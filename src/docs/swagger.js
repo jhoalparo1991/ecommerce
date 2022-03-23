@@ -1,6 +1,7 @@
 const swaggerJsDoc = require("swagger-jsdoc");
+const path = require("path");
 
-const definition = {
+const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
     title: "Ecommerce API",
@@ -21,27 +22,81 @@ const definition = {
     },
   ],
   components: {
-    schemas:{
-        users:{
-            type: "object",
-            properties: {
-                required:['name','lastname','email','password','role'],
-                id: {type:'integer'},
-                name: {type:'string'},
-                lastname: {type:'string'},
-                email: {type:'string'},
-                password: {type:'string'},
-                role: {type:'string'},
-                deleted: {type:'boolean'},
-            }
-        }
+    schemas: {
+      users: {
+        type: "object",
+        required: ["name", "lastname", "email", "password", "role"],
+        properties: {
+          name: {
+            type: "string",
+          },
+          lastname: {
+            type: "string",
+          },
+          email: {
+            type: "string",
+          },
+          password: {
+            type: "string",
+          },
+          role: {
+            type: "string",
+          },
+        },
+      },
+      categories: {
+        type: "object",
+        required: ["name"],
+        properties: {
+          name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          }
+        },
+      },
+      products: {
+        type: "object",
+        required: ["product_name","category_id"],
+        properties: {
+          product_name: {
+            type: "string",
+          },
+          description: {
+            type: "string",
+          },
+          stock: {
+            type: "float",
+          },
+          price: {
+            type: "float",
+          },
+          imagen: {
+            type: "string",
+          },
+          favorite: {
+            type: "boolean",
+          },
+          category_id: {
+            type: "integer",
+          }
+        },
+      },
+    },
+    securitySchemes:{
+      bearerAuth:{
+        type:'http',
+        scheme:'bearer',
+        bearerFormat: 'JWT'
+      }
     }
-  }
+  },
 };
 
 const options = {
-  definition,
-  apis: ["../routes/*.js"], // files containing annotations as above
+  swaggerDefinition,
+  apis: [ `${path.resolve('src','routes')}/*.js`]
 };
 
 const openapiSpecification = swaggerJsDoc(options);

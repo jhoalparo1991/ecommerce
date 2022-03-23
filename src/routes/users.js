@@ -1,24 +1,27 @@
 const { Router } = require("express");
-const { findAll } = require("../controllers/users");
-
+const { findAll,createUser } = require("../controllers/users");
+const { validateRegister } = require("../validators/user-validators");
 const routes = Router();
 
 /**
- * find all users
- * @openapi
- *  /user:
- *      get:
- *          sumary: find all users
- *          description: return a list of users
- *              content:
- *                  application/json:
- *                      schema:
- *                          $ref: '#/components/schemas/users'
- *          requestBody:
- *              
- *          responses:
- *              '201': 'Return list of users'
- */
+*Devuelve una ista de usuarios
+*@openapi
+*   /users:
+*       get:
+*           tag:
+*               - users
+*           summary: "get users"
+*           description: "This route return list users"
+*           responses:
+*               200:
+*                   description: "Return list user"
+*               403:
+*                   description: "Error getting users"
+*               404:
+*                   description: "Not found"
+*/
 routes.get("/", findAll);
+
+routes.post("/", validateRegister,createUser);
 
 module.exports = routes;

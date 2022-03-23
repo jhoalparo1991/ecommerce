@@ -21,6 +21,7 @@ const userModel = sequelize.define('users',{
     },
     role:{
         type: DataTypes.ENUM(['user','admin']),
+        default: 'user'
     },
     deleted:{
         type: DataTypes.BOOLEAN,

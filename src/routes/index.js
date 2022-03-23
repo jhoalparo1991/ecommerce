@@ -2,6 +2,6 @@ const express = require('express');
 
 const routes = express();
 
-routes.use('/user',require('./users'));
+routes.use('/users',require('./users'));
 
 module.exports = routes;
