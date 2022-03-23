@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const path = require('path');
 const debug = require('debug')('app');
 const {mysqlConnection} = require('./src/database/mysql');
+const swaggerUI = require('swagger-ui-express');
+const openapiSpecification = require('./src/docs/swagger');
 
 // Initialization
 const app = express();
@@ -16,6 +18,9 @@ app.use(morgan('combined'))
 
 // Static files
 app.use( express.static(path.join(__dirname, 'src','public','uploads')))
+
+// Documentation
+app.use('/docs',swaggerUI.serve,swaggerUI.setup(openapiSpecification));
 // Routes
 app.use('/api/v1',require('./src/routes'));
 
