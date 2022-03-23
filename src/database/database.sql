@@ -9,7 +9,7 @@ create table users(
     lastname varchar(255) not null,
     email varchar(255) not null unique,
     password varchar(255) not null,
-    role varchar(255) not null default 'user',
+    role varchar(255) not null,
     deleted boolean default false,
     createdAt timestamp default now(),
     updatedAt timestamp default now()

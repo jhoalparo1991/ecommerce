@@ -28,6 +28,15 @@ app.use('/api/v1',require('./src/routes'));
 
 // Starting server
 
-    app.listen(port,()=>{
-        debug(`Server on port ${port}`);
-    });
+const NODE_ENV = process.env.NODE_ENV
+
+if(NODE_ENV !== 'test'){
+
+    app.listen(port);
+
+    // app.listen(port,()=>{
+    //     debug(`Server on port ${port}`);
+    // });
+}
+
+module.exports = app;
