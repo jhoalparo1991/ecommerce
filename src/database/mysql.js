@@ -8,18 +8,19 @@ const MYSQL_PORT = process.env.MYSQL_PORT;
 const MYSQL_HOSTNAME = process.env.MYSQL_HOSTNAME;
 const MYSQL_DIALECT = process.env.MYSQL_DIALECT;
 
+const sequelize = new Sequelize(
+  MYSQL_DATABASE,
+  MYSQL_USERNAME,
+  MYSQL_PASSWORD,
+  {
+    host: MYSQL_HOSTNAME,
+    dialect: MYSQL_DIALECT,
+    port: MYSQL_PORT
+  }
+);
+
 const mysqlConnection = async () => {
   try {
-    const sequelize = new Sequelize(
-      MYSQL_DATABASE,
-      MYSQL_USERNAME,
-      MYSQL_PASSWORD,
-      {
-        host: MYSQL_HOSTNAME,
-        dialect: MYSQL_DIALECT,
-        port: MYSQL_PORT
-      }
-    );
 
     await sequelize.authenticate();
     debug('Connected successfully');
@@ -29,4 +30,4 @@ const mysqlConnection = async () => {
   }
 };
 
-module.exports = mysqlConnection;
+module.exports = {mysqlConnection, sequelize};

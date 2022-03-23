@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const debug = require('debug')('app');
-const mysqlConnection = require('./src/database/mysql');
+const {mysqlConnection} = require('./src/database/mysql');
 
 // Initialization
 const app = express();
@@ -17,7 +17,7 @@ app.use(morgan('combined'))
 // Static files
 app.use( express.static(path.join(__dirname, 'src','public','uploads')))
 // Routes
-
+app.use('/api/v1',require('./src/routes'));
 
 // Starting server
 app.listen(port,()=>{
