@@ -10,7 +10,9 @@ create table users(
     email varchar(255) not null unique,
     password varchar(255) not null,
     role varchar(255) not null,
-    deleted boolean default false
+    deleted boolean default false,
+    createdAt timestamp default now(),
+    updatedAt timestamp default now()
 )Engine=InnoDB;
 
 create table products(
@@ -22,14 +24,18 @@ create table products(
     role varchar(255) not null,
     deleted boolean default false,
     category_id int not null,
-    imagen varchar(255) null
+    imagen varchar(255) null,
+    createdAt timestamp default now(),
+    updatedAt timestamp default now()
 )Engine=InnoDB;
 
 create table categories(
     id int primary key auto_increment not null,
     name varchar(255) not null unique,
     description varchar(255) null,
-    deleted boolean default false
+    deleted boolean default false,
+    createdAt timestamp default now(),
+    updatedAt timestamp default now()
 )Engine=InnoDB;
 
 alter table products

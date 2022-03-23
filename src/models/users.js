@@ -26,6 +26,8 @@ const userModel = sequelize.define('users',{
         type: DataTypes.BOOLEAN,
         default: false,
     }
+},{
+    timestamp:true
 });
 
 
