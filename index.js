@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const debug = require('debug')('app');
 const mysqlConnection = require('./src/database/mysql');
 
@@ -13,6 +14,8 @@ const port = process.env.PORT || 3000;
 // Middlewares
 app.use(morgan('combined'))
 
+// Static files
+app.use( express.static(path.join(__dirname, 'src','public','uploads')))
 // Routes
 
 
