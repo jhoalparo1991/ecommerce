@@ -32,11 +32,11 @@ const NODE_ENV = process.env.NODE_ENV
 
 if(NODE_ENV !== 'test'){
 
-    app.listen(port);
+    // app.listen(port);
 
-    // app.listen(port,()=>{
-    //     debug(`Server on port ${port}`);
-    // });
+    app.listen(port,()=>{
+        debug(`Server on port ${port}`);
+    });
 }
 
 module.exports = app;

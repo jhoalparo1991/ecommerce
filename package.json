@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "set DEBUG=app & nodemon ./index.js",
-    "test": "cross-env NODE_ENV=test jest --coverage --detectOpenHandles --forceExit"
+    "test-coverage": "cross-env NODE_ENV=test jest  --coverage --detectOpenHandles --silent  --forceExit",
+    "test-w": "cross-env NODE_ENV=test jest  --watch --silent"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.4",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.3",
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
@@ -36,6 +38,9 @@
     ],
     "displayName": "Test API ecommerce",
     "testEnvironment": "node",
-    "coverageReporters":["json","html"]
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   }
 }

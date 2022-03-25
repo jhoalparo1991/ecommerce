@@ -27,6 +27,9 @@ const swaggerDefinition = {
         type: "object",
         required: ["name", "lastname", "email", "password", "role"],
         properties: {
+          id: {
+            type: "string",
+          },
           name: {
             type: "string",
           },
@@ -42,6 +45,24 @@ const swaggerDefinition = {
           role: {
             type: "string",
           },
+        },
+      },
+      users_edit: {
+        type: "object",
+        required: ["name", "lastname", "email"],
+        properties: {
+          name: {
+            type: "string",
+          },
+          lastname: {
+            type: "string",
+          },
+          email: {
+            type: "string",
+          },
+          role: {
+            type: "string",
+          }
         },
       },
       categories: {
