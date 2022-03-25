@@ -39,6 +39,14 @@ const send_mail = async(req,res)=>{
     req = matchedData(req);
     const { email } = req;
 
+    const email_exist = await userModel.findOne({where:{email}});
+
+    if(!email_exist){
+      return res.status(404).json({
+        message: 'Email not found in our database'
+      })
+    }
+
       const transporter = nodemailer.createTransport({
         host: process.env.NODEMAILER_HOST,
         port: process.env.NODEMAILER_PORT,
@@ -49,7 +57,6 @@ const send_mail = async(req,res)=>{
         }
       })
 
-      // debug(transporter)
 
       await transporter.sendMail({
           from:process.env.NODEMAILER_USER,
