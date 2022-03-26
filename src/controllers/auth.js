@@ -1,4 +1,4 @@
-const { compare } = require("../utils/bcryptjs");
+const { compare,encrypt } = require("../utils/bcryptjs");
 const { userModel } = require("../models");
 const { matchedData } = require("express-validator");
 const error_handle = require("../utils/error-handle");
@@ -76,7 +76,7 @@ const send_mail = async(req,res)=>{
               <h1>Cambio de clave</h1>
               <p>Este mensaje fue enviado desde la aplicacion de Ecommerce</p>
               <p>Haga click en el siguiente enlace para hacer el proceso de cambio de calve</p>
-              <a href='http://localhost:5000/api/v1/auth/reset-password'>Change password</a>
+              <a href='http://localhost:5000/api/v1/auth/reset-password?email=${email}'>Change password</a>
               <footer>
                   <p>Jhonatan Padilla Rovira</p>
                   <p>&copy; Todos los derechos reservados 2022</p>
@@ -103,10 +103,36 @@ const send_mail = async(req,res)=>{
 
 const reset_password = async(req,res) => {
   try {
-      res.send('Change password received');
+
+      req = matchedData(req);
+
+      let { password,password_repet,email } = req;
+
+      const email_exist = await userModel.findOne({where:{email}});
+
+      if(!email_exist){
+        return res.status(400).json({
+          message: 'Email not found in our database'
+        })
+      }
+
+      if(password !== password_repet){
+        return res.status(400).json({
+          message: 'The password not is equal'
+        })
+      }
+
+      password = encrypt(password);
+      const updatePassword = await userModel.update({password},{where:{email}});
+      res.status(201).json({
+        updatePassword,
+        message: 'Password updated successfully'
+      })
   } catch (error) {
     error_handle(res, error.message, 500);
   }
 }
+
+
 
 module.exports = { loginController,send_mail,reset_password };

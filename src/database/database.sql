@@ -15,6 +15,19 @@ create table users(
     updatedAt timestamp default now()
 )Engine=InnoDB;
 
+create table user_photo(
+    id int primary key auto_increment,
+    user_id int not null,
+    name_image varchar(150) not null unique,
+    url_image varchar(255) not null unique
+)Engine=InnoDB
+
+alter table user_photo
+add constraint fk_user_photo
+foreign key (user_id) references users(id)
+on update cascade
+on delete no action;
+
 create table products(
     id int primary key auto_increment not null,
     product_name varchar(255) not null ,

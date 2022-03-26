@@ -1,7 +1,7 @@
 // Imports
 const { Router } = require("express");
 const { loginController,send_mail,reset_password } = require('../controllers/auth');
-const { validateLogin, validateRestorePassword } = require('../validators/user-validators');
+const { validateLogin, validateSendEmail,validateRestorePassword } = require('../validators/user-validators');
 
 // Initialization
 const routes = Router();
@@ -9,8 +9,8 @@ const routes = Router();
 
 // Implements routes
 routes.post('/',validateLogin,loginController);
-routes.post('/send-mail',validateRestorePassword,send_mail);
-routes.post('/reset-password',reset_password);
+routes.post('/send-mail',validateSendEmail,send_mail);
+routes.post('/reset-password',validateRestorePassword,reset_password);
 
 // Export route
 module.exports = routes;
